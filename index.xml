@@ -2,10 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>cjon&#39;s blog</title>
-    <link>http://localhost:1313/</link>
+    <link>//localhost:1313/</link>
     <description>Recent content on cjon&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 26 May 2022 20:38:36 -0400</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 28 May 2022 17:25:48 -0400</lastBuildDate><atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Networks Git Containers Jamstack</title>
+      <link>//localhost:1313/post/shared-mutable-state/</link>
+      <pubDate>Sat, 28 May 2022 17:25:48 -0400</pubDate>
+      
+      <guid>//localhost:1313/post/shared-mutable-state/</guid>
+      <description>If we&amp;rsquo;re careless in how we handle shared mutable state cause then it will cause problems. This is some random thoughts about how we deal with it.
+Git Git is a good example of a system to manage shared mutable state. It works well because there is almost no shared state mutation. It gives the appearance of having mutable state because &amp;ldquo;files do change.&amp;rdquo; There is no actual state mutation there though because a commit just creates a new object.</description>
+    </item>
+    
   </channel>
 </rss>
