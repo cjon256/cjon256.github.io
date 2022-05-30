@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+		
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>FizzBuzz Noodling &middot; cjon&#39;s blog</title>
+
+		
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" href="/favicon.ico"/>
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="cjon&#39;s blog" />
+
+		<script src="/js/darkmode.js"></script>
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					
+						<h2 class="nav-title">cjon&#39;s blog</h2>
+					
+				</a>
+				<ul>
+    
+    
+</ul>
+			</div>
+		</nav>
+
+        <div id="darkModeToggle" onclick="toggleDarkMode()">
+  &#9680; 
+</div>
+
+        
+
+<main>
+	
+
+
+        <div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2022-05-26 20:38:36 -0400 EDT">May 26, 2022</time>
+</div>
+
+		<h1 class="post-title">FizzBuzz Noodling</h1>
+<div class="post-line"></div>
+
+		
+
+		<h1 id="fizzbuzz">FizzBuzz</h1>
+<p>A large percentage of programmers are probably familiar with the FizzBuzz
+problem. This post was inspired by a solution that sent me contemplating what
+makes a given piece of code easy or hard to understand.</p>
+<p>A naive solution to FizzBuzz looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">fizzbuzz</span>(<span style="color:#a6e22e">n</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">n</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">15</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;FizzBuzz&#34;</span>
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">n</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Buzz&#34;</span>
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">n</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Fizz&#34;</span>
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">n</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Now, you might be asking by now: Why are we going to all this trouble?
+Answer: We&rsquo;re trying to avoid the duplication in a version like:
+I don&rsquo;t think changing the above makes any kind of sense, and certainly not into
+either of the two versions above. But what if the mod operator took a few
+seconds and you needed to operate over very large inputs. Then avoiding the
+duplication of effort would make sense.</p>
+<p>We could do it like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">fizzbuzz</span>(<span style="color:#a6e22e">n</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">n</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">n</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;FizzBuzz&#34;</span>
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Fizz&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">n</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Buzz&#34;</span>
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">n</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>But then you have code duplication. Avoiding both is pretty tricky, and likely
+not worth it in most cases.</p>
+<p>I was fascinated with this snippet of code from <a href="https://www.youtube.com/watch?v=FyCYva9DhsI">Clean Coders Hate What Happens
+to Your Code When You Use These Enterprise Programming Tricks</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">fizzbuzz</span>(<span style="color:#a6e22e">n</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">test</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">d</span>, <span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">x</span>) =&gt; (<span style="color:#a6e22e">n</span> <span style="color:#f92672">%</span> <span style="color:#a6e22e">d</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">_</span> =&gt; <span style="color:#a6e22e">s</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">x</span>(<span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#f92672">:</span> <span style="color:#a6e22e">x</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">fizz</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span> =&gt; <span style="color:#a6e22e">test</span>(<span style="color:#ae81ff">3</span>, <span style="color:#e6db74">&#39;Fizz&#39;</span>, <span style="color:#a6e22e">x</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">buzz</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span> =&gt; <span style="color:#a6e22e">test</span>(<span style="color:#ae81ff">5</span>, <span style="color:#e6db74">&#39;Buzz&#39;</span>, <span style="color:#a6e22e">x</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fizz</span>(<span style="color:#a6e22e">buzz</span>(<span style="color:#a6e22e">x</span> =&gt; <span style="color:#a6e22e">x</span>))(<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">toString</span>())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This is fascinating and frustrating. The initial <code>test</code> function is in proper
+continuation passing style but is not properly tail recursive (note: I think I
+properly recall the terminology from my study of scheme from almost a decade
+ago, if I&rsquo;m wrong let me know in the comments). And the way it is invoked leads
+to <code>fizz</code> calling <code>buzz</code> calling the anonymous identity function <code>x=&gt;x</code>.</p>
+<p>I think how this is working is more cleanly expressed as:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">fizzbuzz</span>(<span style="color:#a6e22e">n</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">p</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cc</span> =&gt; ((<span style="color:#a6e22e">str</span>) =&gt; <span style="color:#a6e22e">str</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">cc</span>(<span style="color:#a6e22e">n</span>) <span style="color:#f92672">:</span> <span style="color:#a6e22e">cc</span>(<span style="color:#a6e22e">str</span>))
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cc</span> =&gt; ((<span style="color:#a6e22e">str</span>) =&gt; <span style="color:#a6e22e">n</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">cc</span>(<span style="color:#a6e22e">str</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;Buzz&#34;</span>) <span style="color:#f92672">:</span> <span style="color:#a6e22e">cc</span>(<span style="color:#a6e22e">str</span>))
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">f</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cc</span> =&gt; (<span style="color:#a6e22e">_</span> =&gt; <span style="color:#a6e22e">n</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">cc</span>(<span style="color:#e6db74">&#34;Fizz&#34;</span>) <span style="color:#f92672">:</span> <span style="color:#a6e22e">cc</span>(<span style="color:#e6db74">&#34;&#34;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">fb</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">f</span>(<span style="color:#a6e22e">b</span>(<span style="color:#a6e22e">p</span>(<span style="color:#a6e22e">x</span>=&gt;<span style="color:#a6e22e">x</span>)))
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fb</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>So the 3 helper functions defined are now properly continuation passing style
+and tail recursive. I don&rsquo;t think this is amazingly readable, (except to a very
+select subset of programmers) but it seems neater and more orderly to me.</p>
+<p>But I I had to do it, I would not be using any
+arrow functions that return CPS functions.</p>
+<p>The fundamental problem seems to me to be that you have overlapping comparisons
+that don&rsquo;t combine in neat ways.</p>
+<p>The way Fizz and Buzz relate seems nice and simple, but then the &lsquo;N&rsquo; value when
+neither match throws a monkey wrench in the way and trying to use simple logic,
+and you&rsquo;d run into outputs like &ldquo;Fizz6&rdquo; if you merely try to concatenate the
+results of two functions.</p>
+
+
+<table style="border:1px solid;">
+<tr style="border:1px solid;"><td style="border:1px solid;">&nbsp;</td><td style="border:1px solid;">%5</td><td style="border:1px solid;">not</td</tr>
+<tr style="border:1px solid;"><td style="border:1px solid;">%3</td><td style="border:1px solid;">'FizzBuzz'</td><td style="border:1px solid;">'Fizz'</td</tr>
+<tr style="border:1px solid;"><td style="border:1px solid;">not</td><td style="border:1px solid;">'Buzz'</td><td style="border:1px solid;">N</td</tr>
+</table>
+
+
+<p>The best I&rsquo;m able to come up with for this is something like:
+And I&rsquo;m fairly satisfied with this approach, although I don&rsquo;t think the code is
+especially clear. Perhaps the below is better, but</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">fizzbuzz</span>(<span style="color:#a6e22e">n</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fizz</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;Fizz&#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">buzz</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;Buzz&#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">retval</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fizz</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">buzz</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">retval</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">retval</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">n</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">retval</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>I think the explicit check of the return value is a bit ugly. If that is for
+some reason forbidden then I&rsquo;d probably try something like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">fizzbuzz</span>(<span style="color:#a6e22e">n</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">buzz</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> Array(<span style="color:#ae81ff">2</span>).<span style="color:#a6e22e">fill</span>(<span style="color:#e6db74">&#34;Buzz&#34;</span>) <span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;&#39;</span>,<span style="color:#a6e22e">n</span>]
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;Fizz&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">buzz</span>[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">:</span> <span style="color:#a6e22e">buzz</span>[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Although again, we&rsquo;ve sacrificed some readability.</p>
+<p>Note: This is what I used to make sure output for all the above functions was similar:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#a6e22e">i</span> <span style="color:#66d9ef">in</span> [...Array(<span style="color:#ae81ff">16</span>).<span style="color:#a6e22e">keys</span>()]) { <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">fizzbuzz</span>(Number(<span style="color:#a6e22e">i</span>)<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)); }
+</span></span></code></pre></div>
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/post/test-markup/" class="left arrow">&#8592;</a>
+		<a href="/post/immutable-annoyance/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			
+			<span>
+			&copy; <time datetime="2022-05-30 10:41:32.406703 -0400 EDT m=&#43;0.109779167">2022</time> . Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+    </body>
+</html>
