@@ -2,17 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://blog.cjon256.com/</loc>
     <lastmod>2022-05-28T17:25:48-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/shared-mutable-state/</loc>
+    <loc>https://blog.cjon256.com/post/shared-mutable-state/</loc>
     <lastmod>2022-05-28T17:25:48-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/post/</loc>
+    <loc>https://blog.cjon256.com/post/</loc>
     <lastmod>2022-05-28T17:25:48-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://blog.cjon256.com/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://blog.cjon256.com/tags/</loc>
   </url>
 </urlset>
