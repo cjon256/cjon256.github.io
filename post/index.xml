@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on cjon&#39;s blog</title>
+    <link>http://localhost:1313/post/</link>
+    <description>Recent content in Posts on cjon&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 28 May 2022 18:58:11 -0400</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Father</title>
+      <link>http://localhost:1313/post/father/</link>
+      <pubDate>Sat, 28 May 2022 18:58:11 -0400</pubDate>
+      
+      <guid>http://localhost:1313/post/father/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Networks Containers Jamstack</title>
+      <link>http://localhost:1313/post/networks-containers-jamstack/</link>
+      <pubDate>Sat, 28 May 2022 17:25:48 -0400</pubDate>
+      
+      <guid>http://localhost:1313/post/networks-containers-jamstack/</guid>
+      <description>Networks State is at the bottom of almost all our problems when it comes to computer systems.
+Some people would point to concurrency, but concurrency without state is trivial.
+I&amp;rsquo;ve been a network admin at a small web host for over a decade. Started with Foundry, did Cisco Cat6500 for far too long, and then switched to Juniper (MX and QFX primarily). When I started I was a hybrid programmer/sysadmin/netadmin because the company was less than 10 people.</description>
+    </item>
+    
+    <item>
+      <title>Immutable Annoyance</title>
+      <link>http://localhost:1313/post/immutable-annoyance/</link>
+      <pubDate>Fri, 27 May 2022 15:32:32 -0400</pubDate>
+      
+      <guid>http://localhost:1313/post/immutable-annoyance/</guid>
+      <description>So quotes like this annoy me
+ The immutable server pattern: Once code has been committed in Git, we don&amp;rsquo;t want anything else to change.
+  The GitOps Pipeline - Part 2  the thing is, it oversimplifies.
+There is some state anytime your code runs. What they mean is immutable is configuration, (by which I mean state that persists between runs).
+There are, it seems to me, three distinct sources of persistent state.</description>
+    </item>
+    
+    <item>
+      <title>FizzBuzz Noodling</title>
+      <link>http://localhost:1313/post/fizzbuzz/</link>
+      <pubDate>Thu, 26 May 2022 20:38:36 -0400</pubDate>
+      
+      <guid>http://localhost:1313/post/fizzbuzz/</guid>
+      <description>&lt;h1 id=&#34;fizzbuzz&#34;&gt;FizzBuzz&lt;/h1&gt;
+&lt;p&gt;A large percentage of programmers are probably familiar with the FizzBuzz
+problem. This post was inspired by a solution that sent me contemplating what
+makes a given piece of code easy or hard to understand.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Foo</title>
+      <link>http://localhost:1313/post/test-markup/</link>
+      <pubDate>Wed, 25 May 2022 20:38:36 -0400</pubDate>
+      
+      <guid>http://localhost:1313/post/test-markup/</guid>
+      <description>&lt;p&gt;This is just a place for me to fiddle with Markdown&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
